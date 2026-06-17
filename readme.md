@@ -1,101 +1,266 @@
-# EKA – Enterprise Knowledge Assistant 🚀
+# EKA – Enterprise Knowledge Assistant
 
-> **Production-grade RAG system** that transforms enterprise documents into an AI-powered Q&A assistant. Built with modern tech stack: Next.js, FastAPI, PostgreSQL + pgvector, and LangChain.
+### Enterprise-Grade GenAI Platform for Organizational Knowledge Retrieval
 
-**💡 The Problem:** Teams waste 2-3 hours daily searching through scattered documents (PDFs, Word docs, wikis) instead of focusing on high-value work.
+EKA (Enterprise Knowledge Assistant) is a production-ready Retrieval-Augmented Generation (RAG) platform that enables organizations to transform unstructured documents into an intelligent, searchable knowledge system powered by Large Language Models (LLMs).
 
-**✅ The Solution:** Upload documents once, ask questions in natural language, get instant answers with source citations. Think "ChatGPT for your company's knowledge base."
-
-[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
-[![Python 3.12+](https://img.shields.io/badge/python-3.12+-blue.svg)](https://www.python.org/downloads/)
-[![Next.js](https://img.shields.io/badge/next.js-14+-black)](https://nextjs.org/)
-[![FastAPI](https://img.shields.io/badge/FastAPI-0.116+-009688.svg)](https://fastapi.tiangolo.com)
-
-## 🎥 Product Demo
-
-🔗 **Try it now:** https://eka-ten.vercel.app  
-
-[![EKA – Enterprise Knowledge Assistant Demo](https://img.youtube.com/vi/6fdRzY7N60M/0.jpg)](https://youtu.be/6fdRzY7N60M)
+The platform allows employees to interact with enterprise documents using natural language, eliminating the need to manually search through PDFs, reports, policies, and technical documentation. EKA combines semantic search, vector embeddings, and LLM-based reasoning to deliver accurate, context-aware responses with source citations.
 
 ---
 
-## 🎯 Key Features
+## Business Problem
 
-- 📄 **Multi-format document processing** (PDF, DOCX, TXT) with smart chunking
-- 🔍 **Vector search** via PostgreSQL + pgvector for semantic retrieval
-- 💬 **Streaming answers** from GPT-4 with automatic source citations
-- 🔐 **JWT auth** + per-user document isolation
-- 📊 **Analytics** for usage tracking and cost monitoring
+Organizations generate thousands of documents across departments including policies, technical specifications, operational procedures, compliance reports, and knowledge articles.
 
----
+Employees spend significant time searching for information across disconnected repositories, resulting in:
 
-## 🛠️ Tech Stack
+* Reduced productivity
+* Knowledge silos
+* Duplicate work
+* Delayed decision-making
+* Inefficient onboarding
 
-**Frontend:** Next.js 14 (App Router, TypeScript) · Tailwind + shadcn/ui · SSE streaming
-
-**Backend:** FastAPI (Python 3.12+, async) · SQLAlchemy · LangChain · Pydantic v2
-
-**Data & AI:** PostgreSQL + pgvector · VoyageAI embeddings · OpenAI GPT-4 · Supabase storage
-
-**DevOps:** Docker Compose · Multi-stage builds · `uv` dependency manager
+EKA addresses these challenges by creating a centralized AI-powered knowledge layer that provides instant access to organizational information.
 
 ---
 
-## 📐 Architecture
+## Solution Overview
 
-**Clean Architecture** with Repository Pattern: `Router → Service → Repository → Database`
+EKA implements a Retrieval-Augmented Generation architecture that combines vector search with Large Language Models to provide grounded and explainable responses.
 
-**Backend:** Domain-driven modules (`auth`, `documents`, `chat`, `analytics`, `users`) with FastAPI dependency injection.
+### Core Capabilities
 
-📄 **Detailed C4 diagrams** in `docs/c4/`
+* Enterprise document ingestion and processing
+* Semantic search using vector embeddings
+* Context-aware question answering
+* Source citation generation
+* Multi-user authentication and authorization
+* Real-time AI response streaming
+* Usage analytics and monitoring
+* Secure document isolation
 
 ---
 
-## 🔄 RAG Pipeline
+## System Architecture
 
+```text
+Client (Next.js)
+
+        │
+
+        ▼
+
+FastAPI API Gateway
+
+        │
+
+        ▼
+
+LangChain Orchestration Layer
+
+        │
+
+ ┌──────┴─────────┐
+ ▼                ▼
+
+Vector Search     GPT-4
+(pgvector)        Generation
+
+        │
+
+        ▼
+
+PostgreSQL + Document Store
 ```
-1. Upload → Extract text → Chunk (512 tokens, semantic boundaries)
-2. Generate embeddings (VoyageAI) → Store in pgvector
-3. Query → Embed → Cosine similarity search → Top-K retrieval
-4. Build prompt → GPT-4 generation → Stream response + citations
-```
 
+### Architectural Principles
 
-
----
-
-## 🎯 Design Decisions
-
-**Architecture:** Repository pattern + dependency injection for testability and maintainability.
-
-**RAG Strategy:** Hybrid chunking (semantic + 512 token limit) with metadata filtering for accurate retrieval.
-
-**Trade-offs:** PDF parsing struggles with complex tables; large docs split into chunks; embedding costs scale with volume.
-
-**Roadmap:** Rate limiting → Multi-tenant orgs → Redis caching → Multimodal RAG
-
-
-
-## 🛠️ Technical Highlights
-
-**Backend:** Clean Architecture (Router → Service → Repository) · Async/await · Custom error handling · Argon2 + JWT auth · FastAPI DI
-
-**AI/ML:** Full RAG pipeline (not just PDF chat) · Production pgvector indexing · Embedding batching + cost tracking · Prompt optimization
-
-**Frontend:** Next.js App Router (SSR + SSE streaming) · TypeScript · shadcn/ui components
-
-**DevOps:** Docker multi-stage builds · Environment validation · Health checks
-
-**Approach:** Clear docs · Explicit trade-offs · Business-focused problem solving  
+* Clean Architecture
+* Repository Pattern
+* Dependency Injection
+* Domain-Driven Design
+* Asynchronous Processing
+* Scalable Microservice-Oriented Backend
 
 ---
 
-## 📚 Resources
+## Retrieval-Augmented Generation Pipeline
 
-[Architecture Diagrams](docs/c4/) · [Data Model](docs/data-model/datamodel.md) · [LangChain RAG](https://python.langchain.com/docs/use_cases/question_answering/) · [pgvector](https://github.com/pgvector/pgvector)
+### Document Ingestion
+
+* Upload enterprise documents
+* Extract raw text content
+* Metadata enrichment
+* Semantic chunk generation
+
+### Embedding Generation
+
+* Generate dense vector embeddings
+* Store embeddings in PostgreSQL using pgvector
+* Maintain document metadata relationships
+
+### Retrieval
+
+* Query embedding generation
+* Similarity search using cosine distance
+* Top-K document retrieval
+* Context ranking and filtering
+
+### Generation
+
+* Prompt construction
+* Context injection
+* GPT-4 response generation
+* Source citation attachment
 
 ---
 
+## Key Features
 
+### Intelligent Knowledge Retrieval
 
-</div>
+* Natural language querying
+* Context-aware responses
+* Hallucination reduction through RAG
+* Source-grounded answers
+
+### Enterprise Security
+
+* JWT Authentication
+* Role-Based Access Control (RBAC)
+* User-level document isolation
+* Secure API access
+
+### Analytics & Monitoring
+
+* Query tracking
+* Token consumption monitoring
+* Usage analytics
+* Cost visibility
+
+### Real-Time User Experience
+
+* Streaming AI responses
+* Responsive interface
+* Fast semantic retrieval
+* Low-latency interactions
+
+---
+
+## Technology Stack
+
+### Frontend
+
+* Next.js 14
+* TypeScript
+* Tailwind CSS
+* shadcn/ui
+
+### Backend
+
+* Python
+* FastAPI
+* SQLAlchemy
+* Pydantic
+
+### Artificial Intelligence
+
+* OpenAI GPT-4
+* LangChain
+* Retrieval-Augmented Generation (RAG)
+* Vector Embeddings
+
+### Database & Storage
+
+* PostgreSQL
+* pgvector
+* Supabase Storage
+
+### DevOps & Infrastructure
+
+* Docker
+* Docker Compose
+* Multi-stage Builds
+* Environment Validation
+* Health Monitoring
+
+---
+
+## Technical Highlights
+
+### AI Engineering
+
+* End-to-end RAG implementation
+* Semantic document retrieval
+* Prompt orchestration
+* Context optimization
+* Vector similarity search
+
+### Software Engineering
+
+* RESTful API design
+* Async backend architecture
+* Layered service design
+* Repository abstraction
+* Error handling framework
+
+### Performance Optimizations
+
+* Embedding batching
+* Vector indexing
+* Streaming responses
+* Efficient document chunking
+* Metadata filtering
+
+---
+
+## Scalability Considerations
+
+The platform is designed for enterprise-scale adoption through:
+
+* Horizontal backend scaling
+* Stateless API services
+* Containerized deployment
+* Vector database optimization
+* Modular service architecture
+
+Future enhancements include:
+
+* Redis caching layer
+* Multi-tenant architecture
+* AI Agents
+* LangGraph workflows
+* Multimodal document processing
+* Kubernetes deployment
+
+---
+
+## Results
+
+* Reduced document search time through semantic retrieval
+* Improved knowledge accessibility across teams
+* Delivered source-grounded AI responses
+* Enabled scalable enterprise knowledge management
+
+---
+
+## Future Roadmap
+
+* Multi-Agent AI Architecture
+* LangGraph Integration
+* Advanced RBAC
+* Kubernetes Deployment
+* MLflow-Based Model Monitoring
+* Enterprise Audit Logging
+* Hybrid Search (BM25 + Vector Search)
+* Multimodal RAG
+
+---
+
+## Author
+
+Om Anand Dubey
+
+AI Engineer | Backend Developer | Cloud & DevOps Enthusiast
+
+Focused on building scalable AI-powered enterprise applications using Python, FastAPI, LangChain, Cloud Technologies, and Modern Software Engineering Practices.
