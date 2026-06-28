@@ -59,10 +59,10 @@ class DocumentService:
             file_info = storage.get_file_info(file_path)
             original_filename = file_info["filename"]
             
-            # Generar un nombre único si ya existe en la base de datos
+           
             unique_filename = self.repository.generate_unique_filename(original_filename)
             
-            # Crear el documento con el nombre único
+           
             document = self.repository.create_document(
                 filename=unique_filename,
                 file_path=file_info["file_path"],
@@ -75,7 +75,7 @@ class DocumentService:
             documents.append(document)
         
         return documents
-    # Security Section
+   
 
     def _validate_user(self, user: UserContext) -> None:
         if not user or not user.id:
