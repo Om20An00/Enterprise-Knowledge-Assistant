@@ -19,7 +19,7 @@ class UserResponse(UserBase):
 
 
 class UserContext(BaseModel):
-    """Contexto de usuario para uso interno en services"""
+  
     id: int
     username: str
     email: str
