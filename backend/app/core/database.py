@@ -9,7 +9,6 @@ SessionLocal = sessionmaker(autocommit=False, autoflush=False, bind=engine)
 
 Base = declarative_base()
 
-# Dependency
 def get_db():
     db = SessionLocal()
     try:
@@ -18,7 +17,7 @@ def get_db():
         db.close()
 
 def init_db():
-    # ✅ Activar la extensión pgvector (solo la primera vez)
+   
     with engine.connect() as conn:
         conn.execute(text("CREATE EXTENSION IF NOT EXISTS vector;"))
         conn.commit()
