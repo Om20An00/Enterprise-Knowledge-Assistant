@@ -5,7 +5,7 @@ from typing import List, Optional, Dict, Any
 
 
 class AnalyticsRepository:
-    """Repositorio para operaciones de base de datos de analytics"""
+   
     
     def __init__(self, db: Session):
         self.db = db
