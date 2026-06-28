@@ -1,7 +1,4 @@
-"""
-Utilidades para procesamiento de archivos específicos
-Capa de infraestructura - procesamiento técnico de formatos
-"""
+
 import docx
 import fitz  # PyMuPDF
 from langchain.schema import Document
@@ -9,7 +6,7 @@ from pathlib import Path
 
 
 def process_docx(file_path, original_filename=None):
-    """Procesa archivo DOCX y extrae contenido estructurado"""
+   
     try:
         doc = docx.Document(file_path)
         elements = []
@@ -45,7 +42,7 @@ def process_docx(file_path, original_filename=None):
 
 
 def process_md(file_path, original_filename=None):
-    """Procesa archivo Markdown"""
+   
     try:
         with open(file_path, "r", encoding="utf-8") as f:
             text = f.read()
@@ -64,7 +61,7 @@ def process_md(file_path, original_filename=None):
 
 
 def process_pdf(file_path, original_filename=None):
-    """Procesa archivo PDF y extrae contenido con estructura de headers"""
+   
     try:
         doc = fitz.open(str(file_path))
         elements = []
