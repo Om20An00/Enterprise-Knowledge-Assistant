@@ -1,6 +1,4 @@
-"""
-Embedder - Generación y almacenamiento de embeddings
-"""
+
 from typing import List, Dict, Any
 from voyageai import Client
 from sqlalchemy.orm import Session
